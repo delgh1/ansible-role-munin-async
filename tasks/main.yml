@@ -12,7 +12,7 @@
 
 - name: Include Debian based installation steps.
   include_tasks: install-debian.yml
-  when: ansible_os_family == 'Debian'
+  when: ansible_os_family in ['Debian', 'GNU']
 
 - name: Include OpenBSD installation steps.
   include_tasks: install-openbsd.yml
