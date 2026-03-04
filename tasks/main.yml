@@ -18,6 +18,10 @@
   include_tasks: install-openbsd.yml
   when: ansible_os_family == 'OpenBSD'
 
+- name: Include Arch Linux installation steps.
+  include_tasks: install-archlinux.yml
+  when: ansible_os_family == 'Archlinux'
+
 - name: Test that the munin-async client binary exists.
   file: path={{ munin_async_clientbin }} state=file
 

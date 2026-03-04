@@ -21,6 +21,9 @@ galaxy_info:
     - name: OpenBSD
       versions:
         - all
+    - name: ArchLinux
+      versions:
+        - all
   galaxy_tags:
     - monitoring
     - system
