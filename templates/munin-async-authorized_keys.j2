@@ -1,3 +1,9 @@
+{% if munin_async_spool_path is defined %}
+{% for sshpubkey in munin_async_sshpubkeys %}
+no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty,no-user-rc,command="{{ munin_async_clientbin }} --spoolfetch --spooldir {{ munin_async_spool_path }}" {{ sshpubkey }}
+{% endfor %}
+{% else %}
 {% for sshpubkey in munin_async_sshpubkeys %}
 no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty,no-user-rc,command="{{ munin_async_clientbin }} --spoolfetch" {{ sshpubkey }}
 {% endfor %}
+{% endif %}

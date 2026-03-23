@@ -32,7 +32,7 @@ This role is available on [Ansible Galaxy](https://galaxy.ansible.com/zorun/muni
 ## Requirements
 
 This role has been tested to run on Debian (from wheezy to bullseye), Ubuntu,
-CentOS 7 and 8, Fedora, and OpenBSD.
+CentOS 7 and 8, Fedora, FreeBSD, and OpenBSD.
 
 It should also work on all other Debian-derivatives and RedHat-derivatives.
 

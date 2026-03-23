@@ -24,6 +24,9 @@ galaxy_info:
     - name: ArchLinux
       versions:
         - all
+    - name: FreeBSD
+      versions:
+        - all
   galaxy_tags:
     - monitoring
     - system

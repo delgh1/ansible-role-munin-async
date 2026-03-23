@@ -1,0 +1,9 @@
+---
+- name: Ensure munin-node is installed because it includes munin-async (FreeBSD and derivatives).
+  community.general.pkgng: name=munin-node state=present ignore_osver=true
+
+- name: Create munin-async user on FreeBSD.
+  user:
+    name: "{{ munin_async_user }}"
+    system: true
+    home: "{{ munin_async_home }}"
