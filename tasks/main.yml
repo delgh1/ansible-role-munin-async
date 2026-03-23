@@ -26,6 +26,10 @@
   include_tasks: install-freebsd.yml
   when: ansible_os_family == 'FreeBSD'
 
+- name: Include Alpine installation steps.
+  include_tasks: install-alpine.yml
+  when: ansible_os_family == 'Alpine'
+
 - name: Test that the munin-async client binary exists.
   file: path={{ munin_async_clientbin }} state=file
 

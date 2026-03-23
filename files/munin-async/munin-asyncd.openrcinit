@@ -1,0 +1,25 @@
+#!/sbin/openrc-run
+
+# munin-asyncd init.d file for alpine linux.
+name="munin-asyncd"
+description="Munin asynchronous server"
+
+pidfile=/run/munin/munin-asyncd.pid
+
+command="/usr/local/share/munin/munin-asyncd"
+command_user="munin-async"
+command_args=""
+command_background="yes"
+extra_started_commands="reload"
+retry="SIGTERM/30/SIGKILL/5"
+
+depend() {
+        need net munin-node
+        after firewall
+}
+
+reload() {
+        ebegin "Reloading $name"
+        kill -s SIGUSR1 $(cat "$pidfile")
+        eend $?
+}

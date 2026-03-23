@@ -1,0 +1,41 @@
+---
+- name: Ensure munin-node is installed (Alpine).
+  community.general.apk: name=munin-node state=present
+
+- name: Create munin-async group on Alpine. Slightly different settings to adapt to Busybox.
+  group:
+    name: "{{ munin_async_user }}"
+    system: true
+
+- name: Create munin-async user on Alpine. Use a fake password so the account is not locked and we can ssh login.
+  user:
+    name: "{{ munin_async_user }}"
+    system: true
+    home: "{{ munin_async_home }}"
+    group: "{{ munin_async_user }}"
+    shell: /bin/sh
+    password: "$6$fakepassword"
+
+- name: mkdir -p /usr/local/share/munin
+  file:
+    path: "/usr/local/share/munin"
+    state: directory
+    recurse: true
+
+- name: Copy munin-async script.
+  copy:
+    src: munin-async/munin-async
+    dest: "{{ munin_async_clientbin }}"
+    mode: 0755
+
+- name: Copy munin-asyncd script.
+  copy:
+    src: munin-async/munin-asyncd
+    dest: "{{ munin_async_clientbin }}d"
+    mode: 0755
+
+- name: Copy munin-asyncd init script.
+  copy:
+    src: munin-async/munin-asyncd.openrcinit
+    dest: "{{ munin_asyncd_initscript }}"
+    mode: 0755
