@@ -30,6 +30,10 @@
   include_tasks: install-alpine.yml
   when: ansible_os_family == 'Alpine'
 
+- name: Include NetBSD installation steps.
+  include_tasks: install-netbsd.yml
+  when: ansible_os_family == 'NetBSD'
+
 - name: Test that the munin-async client binary exists.
   file: path={{ munin_async_clientbin }} state=file
 

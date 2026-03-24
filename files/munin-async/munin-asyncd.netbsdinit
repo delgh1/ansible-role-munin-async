@@ -1,0 +1,49 @@
+#!/bin/sh
+#
+# PROVIDE: munin-asyncd
+# REQUIRE: munin-node
+# KEYWORD: shutdown
+#
+# You will need to set some variables in /etc/rc.conf to start munin-asyncd:
+#
+# munin_asyncd=YES
+#
+
+if [ -f /etc/rc.subr ]
+then
+    . /etc/rc.subr
+fi
+
+name="munin_asyncd"
+rcvar=$name
+pidfile="/var/run/munin/munin-asyncd.pid"
+start_cmd="munin_asyncd_start"
+stop_cmd="munin_asyncd_stop"
+required_files=/usr/pkg/sbin/daemonize
+user="munin-async"
+
+munin_asyncd_start(){
+	echo "Starting ${name}."
+	/usr/pkg/sbin/daemonize -p ${pidfile} -u ${user} /usr/pkg/lib/munin/munin-asyncd
+}
+
+# Net::Server breaks rc.subr's techniques for detecting whether the
+# process running at a certain PID is actually the process we wish to
+# stop.  Just unconditionally send SIGTERM to the PID instead.
+#
+munin_asyncd_stop()
+{
+	echo "Stopping ${name}."
+	if [ -f ${pidfile} ]; then
+		pid=`/usr/bin/head -1 ${pidfile}`
+		doit="kill ${pid}"
+		if ! eval $doit && [ -z "$rc_force" ]; then
+			return 1
+		fi
+		wait_for_pids $pid
+	fi
+	/bin/rm -f ${pidfile}
+}
+
+load_rc_config $name
+run_rc_command "$1"

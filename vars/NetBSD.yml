@@ -1,0 +1,7 @@
+---
+munin_async_service: munin-asyncd
+munin_async_clientbin: /usr/pkg/lib/munin/munin-async
+munin_async_user: munin-async
+munin_async_group: munin-async
+munin_async_home: /var/lib/munin-async
+munin_asyncd_initscript: /etc/rc.d/munin-asyncd
