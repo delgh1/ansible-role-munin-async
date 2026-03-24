@@ -34,6 +34,10 @@
   include_tasks: install-netbsd.yml
   when: ansible_os_family == 'NetBSD'
 
+- name: Include Suse installation steps.
+  include_tasks: install-suse.yml
+  when: ansible_os_family == 'Suse'
+
 - name: Test that the munin-async client binary exists.
   file: path={{ munin_async_clientbin }} state=file
 

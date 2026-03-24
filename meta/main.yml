@@ -35,6 +35,9 @@ galaxy_info:
     - name: NetBSD
       versions:
         - all
+    - name: Suse
+      versions:
+        - all
   galaxy_tags:
     - monitoring
     - system
