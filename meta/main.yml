@@ -38,6 +38,9 @@ galaxy_info:
     - name: Suse
       versions:
         - all
+    - name: DragonFly
+      versions:
+        - all
   galaxy_tags:
     - monitoring
     - system

@@ -24,7 +24,7 @@
 
 - name: Include FreeBSD installation steps.
   include_tasks: install-freebsd.yml
-  when: ansible_os_family == 'FreeBSD'
+  when: ansible_os_family in ['FreeBSD', 'DragonFly']
 
 - name: Include Alpine installation steps.
   include_tasks: install-alpine.yml
